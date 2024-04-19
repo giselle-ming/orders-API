@@ -13,24 +13,31 @@ const giftModel = new Schema(
     url: {
       type: String,
       required: true,
-    }
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const personModel = new Schema(
+const orderModel = new Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    dob: {
-      type: Date,
+    ingredients: {
+      type: String,
       required: true,
     },
-    gifts: [giftModel],
+    size: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
     ownerId: {
       type: Types.ObjectId,
       required: true,
@@ -42,4 +49,4 @@ const personModel = new Schema(
   }
 );
 
-module.exports = model("person", personModel);
+module.exports = model("order", orderModel);
