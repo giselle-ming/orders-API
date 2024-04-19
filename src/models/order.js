@@ -1,38 +1,17 @@
 const { Schema, model, Types } = require("mongoose");
 
-const giftModel = new Schema(
-  {
-    txt: {
-      type: String,
-      required: true,
-    },
-    store: {
-      type: String,
-      required: true,
-    },
-    url: {
-      type: String,
-      required: true,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
-
 const orderModel = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    ingredients: {
-      type: String,
-      required: true,
-    },
-    size: {
-      type: String,
-      required: true,
+    products: [
+      {
+        type: Types.ObjectId,
+        ref: "product", // Changed from "Product" to "product"
+        required: true,
+      },
+    ],
+    date: {
+      type: Date,
+      default: Date.now,
     },
     price: {
       type: Number,
@@ -41,7 +20,7 @@ const orderModel = new Schema(
     ownerId: {
       type: Types.ObjectId,
       required: true,
-      ref: "user",
+      ref: "user", // Changed from "User" to "user" to match your user model
     },
   },
   {
@@ -49,4 +28,4 @@ const orderModel = new Schema(
   }
 );
 
-module.exports = model("order", orderModel);
+module.exports = model("Order", orderModel);

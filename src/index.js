@@ -11,6 +11,7 @@ const compression = require("compression");
 const helmet = require("helmet");
 const expressSanitize = require("express-mongo-sanitize");
 
+const productRouter = require("./router/index");
 const orderRouter = require("./router/index");
 const { errorHandler } = require("./utils/errors");
 const authRouter = require("./router/auth");
@@ -50,6 +51,7 @@ app.use(passport.session());
 app.get("/", (_req, res) => res.send("Server running"));
 app.use("/auth", authRouter);
 app.use("/api/order", sanitizeBody, orderRouter);
+app.use("/api/product", sanitizeBody, productRouter);
 
 app.use(errorHandler);
 

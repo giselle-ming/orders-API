@@ -4,7 +4,7 @@ const Order = require("../models/order");
 const { BadRequestError, NotFoundError } = require("../utils/errors");
 
 const getAll = async (ownerId) => {
-  const order = await Order.find({ ownerId }); //can filter here
+  const order = await Order.find({ ownerId });
   return order;
 };
 
@@ -15,15 +15,19 @@ const getOne = async (id) => {
 };
 
 const create = async (orderData) => {
-  console.log("Order data:", orderData);
+  if (!orderData.products || !orderData.price || !orderData.ownerId) {
+    throw new BadRequestError("Products, price, and ownerId are required");
+  }
+
   const newOrder = new Order(orderData);
   await newOrder.save();
   return newOrder;
 };
 
 const replace = async (id, orderData) => {
-  if (!orderData.name || !orderData.dob)
-    throw new BadRequestError("Name and DOB are required");
+  if (!orderData.products || !orderData.price || !orderData.ownerId) {
+    throw new BadRequestError("Products, price, and ownerId are required");
+  }
 
   const replacedOrder = await Order.findByIdAndUpdate(
     id,
