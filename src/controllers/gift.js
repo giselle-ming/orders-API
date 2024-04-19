@@ -15,10 +15,10 @@ const getAll = async (req, res, next) => {
 };
 
 const getOne = async (req, res, next) => {
-  const { id: personId, giftId } = req.params;
+  const { id: orderId, giftId } = req.params;
 
   try {
-    const gift = await GiftService.getOne(personId, giftId);
+    const gift = await GiftService.getOne(orderId, giftId);
 
     res.json({ data: gift });
   } catch (error) {
@@ -27,13 +27,10 @@ const getOne = async (req, res, next) => {
 };
 
 const create = async (req, res, next) => {
-  const { id: personId } = req.params;
+  const { id: orderId } = req.params;
 
   try {
-    const createdGift = await GiftService.create(
-      personId,
-      req.sanitizedBody
-    );
+    const createdGift = await GiftService.create(orderId, req.sanitizedBody);
 
     res.json({ data: createdGift });
   } catch (error) {
@@ -42,11 +39,11 @@ const create = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  const { id: personId, giftId } = req.params;
+  const { id: orderId, giftId } = req.params;
 
   try {
     const updatedGift = await GiftService.update(
-      personId,
+      orderId,
       giftId,
       req.sanitizedBody
     );
@@ -57,12 +54,11 @@ const update = async (req, res, next) => {
   }
 };
 
-
 const deleteOne = async (req, res, next) => {
-  const {id: personId, giftId } = req.params;
+  const { id: orderId, giftId } = req.params;
 
   try {
-    const deletedGift = await GiftService.deleteOne(personId, giftId);
+    const deletedGift = await GiftService.deleteOne(orderId, giftId);
     res.json(deletedGift);
   } catch (error) {
     next(error);
@@ -74,5 +70,5 @@ module.exports = {
   getOne,
   create,
   update,
-  deleteOne
+  deleteOne,
 };

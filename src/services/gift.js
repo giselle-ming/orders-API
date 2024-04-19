@@ -1,27 +1,27 @@
 "use strict";
 
-const Person = require("../models/person");
+const Order = require("../models/order");
 const { BadRequestError, NotFoundError } = require("../utils/errors");
 
 const getAll = async (personId) => {
   if (!personId) {
-    throw new BadRequestError("Person ID must be provided");
+    throw new BadRequestError("Order ID must be provided");
   }
 
-  const person = await Person.findById(personId);
+  const person = await Order.findById(personId);
 
   if (!person) {
-    throw new NotFoundError(`Person with ID ${personId} not found`);
+    throw new NotFoundError(`Order with ID ${personId} not found`);
   }
 
   return person.gifts;
 };
 
 const getOne = async (personId, giftId) => {
-  const person = await Person.findById(personId);
+  const person = await Order.findById(personId);
 
   if (!person) {
-    throw new NotFoundError(`Person with ID ${personId} not found`);
+    throw new NotFoundError(`Order with ID ${personId} not found`);
   }
 
   const gift = person.gifts.id(giftId);
@@ -38,7 +38,7 @@ const create = async (personId, giftData) => {
     throw new BadRequestError("Gift data must be provided");
   }
 
-  const updatedPerson = await Person.findByIdAndUpdate(
+  const updatedOrder = await Order.findByIdAndUpdate(
     personId,
     {
       $addToSet: {
@@ -50,11 +50,11 @@ const create = async (personId, giftData) => {
     }
   );
 
-  if (!updatedPerson) {
-    throw new NotFoundError(`Person with ID ${personId} not found`);
+  if (!updatedOrder) {
+    throw new NotFoundError(`Order with ID ${personId} not found`);
   }
 
-  return updatedPerson.gifts[updatedPerson.gifts.length - 1];
+  return updatedOrder.gifts[updatedOrder.gifts.length - 1];
 };
 
 const update = async (personId, giftId, giftData) => {
@@ -67,7 +67,7 @@ const update = async (personId, giftId, giftData) => {
     updateObj[`gifts.$.${key}`] = giftData[key];
   });
 
-  const updatedPerson = await Person.findOneAndUpdate(
+  const updatedOrder = await Order.findOneAndUpdate(
     { _id: personId, "gifts._id": giftId },
     {
       $set: updateObj,
@@ -78,23 +78,21 @@ const update = async (personId, giftId, giftData) => {
     }
   );
 
-  if (!updatedPerson) {
-    throw new NotFoundError(`Person or gift not found`);
+  if (!updatedOrder) {
+    throw new NotFoundError(`Order or gift not found`);
   }
 
-  return updatedPerson.gifts.find(
-    (gft) => gft._id.toString() === giftId
-  );
+  return updatedOrder.gifts.find((gft) => gft._id.toString() === giftId);
 };
 
 const deleteOne = async (personId, giftId) => {
-  const person = await Person.findOneAndUpdate(
+  const person = await Order.findOneAndUpdate(
     { _id: personId, "gifts._id": giftId },
     { $pull: { gifts: { _id: giftId } } }
   );
 
   if (!person) {
-    throw new NotFoundError(`Person with ID ${personId} not found`);
+    throw new NotFoundError(`Order with ID ${personId} not found`);
   }
 
   const deletedGift = person.gifts.id(giftId);
@@ -111,5 +109,5 @@ module.exports = {
   getOne,
   create,
   update,
-  deleteOne
+  deleteOne,
 };
