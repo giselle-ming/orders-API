@@ -11,8 +11,8 @@ const compression = require("compression");
 const helmet = require("helmet");
 const expressSanitize = require("express-mongo-sanitize");
 
-const productRouter = require("./router/index");
-const orderRouter = require("./router/index");
+const productRouter = require("./router/product"); // Changed to "./router/product"
+const orderRouter = require("./router/order"); // Changed to "./router/order"
 const { errorHandler } = require("./utils/errors");
 const authRouter = require("./router/auth");
 const sanitizeBody = require("./middleware/sanitizeBody");
