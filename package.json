@@ -1,0 +1,35 @@
+{
+  "name": "PizzaApp",
+  "version": "1.0.0",
+  "description": "Pizza app",
+  "main": "src/index.js",
+  "author": "Giselle",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "compression": "^1.7.4",
+    "connect-mongo": "^5.1.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-session": "^1.18.0",
+    "helmet": "^6.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-google-oauth20": "^2.0.0",
+    "xss": "^1.0.14"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "repository": "git@github.com:ming0025/testingRender.git"
+}
