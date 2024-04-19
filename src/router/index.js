@@ -1,25 +1,25 @@
 "use strict";
 
 const { Router } = require("express");
-const PersonController = require("../controllers/person");
+const OrderController = require("../controllers/order");
 const GiftController = require("../controllers/gift");
-const isAuthenticated = require('../middleware/isAuthenticated');
+const isAuthenticated = require("../middleware/isAuthenticated");
 
-const personRouter = Router();
+const orderRouter = Router();
 
-personRouter.use(isAuthenticated)
+orderRouter.use(isAuthenticated);
 
-personRouter.get("/", PersonController.getAll);
-personRouter.get("/:id", PersonController.getOne);
-personRouter.post("/", PersonController.create);
-personRouter.put("/:id", PersonController.replace);
-personRouter.patch("/:id", PersonController.update);
-personRouter.delete("/:id", PersonController.deleteOne);
+orderRouter.get("/", OrderController.getAll);
+orderRouter.get("/:id", OrderController.getOne);
+orderRouter.post("/", OrderController.create);
+orderRouter.put("/:id", OrderController.replace);
+orderRouter.patch("/:id", OrderController.update);
+orderRouter.delete("/:id", OrderController.deleteOne);
 
-personRouter.get('/:id/gift', GiftController.getAll);
-personRouter.get('/:id/gift/:giftId', GiftController.getOne);
-personRouter.post('/:id/gift', GiftController.create);
-personRouter.patch('/:id/gift/:giftId', GiftController.update);
-personRouter.delete('/:id/gift/:giftId', GiftController.deleteOne);
+orderRouter.get("/:id/gift", GiftController.getAll);
+orderRouter.get("/:id/gift/:giftId", GiftController.getOne);
+orderRouter.post("/:id/gift", GiftController.create);
+orderRouter.patch("/:id/gift/:giftId", GiftController.update);
+orderRouter.delete("/:id/gift/:giftId", GiftController.deleteOne);
 
-module.exports = personRouter;
+module.exports = orderRouter;

@@ -11,7 +11,7 @@ const compression = require("compression");
 const helmet = require("helmet");
 const expressSanitize = require("express-mongo-sanitize");
 
-const personRouter = require("./router/index");
+const orderRouter = require("./router/index");
 const { errorHandler } = require("./utils/errors");
 const authRouter = require("./router/auth");
 const sanitizeBody = require("./middleware/sanitizeBody");
@@ -25,7 +25,7 @@ app.use(compression());
 app.use(expressSanitize());
 app.use(
   cors({
-    origin: process.env.CORS_WHITELIST
+    origin: process.env.CORS_WHITELIST,
   })
 );
 app.use(express.json());
@@ -49,7 +49,7 @@ app.use(passport.session());
 
 app.get("/", (_req, res) => res.send("Server running"));
 app.use("/auth", authRouter);
-app.use("/api/person", sanitizeBody, personRouter);
+app.use("/api/order", sanitizeBody, orderRouter);
 
 app.use(errorHandler);
 

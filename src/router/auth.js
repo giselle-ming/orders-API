@@ -27,8 +27,8 @@ authRouter.get(
   (req, res) => {
     // lookup the state from googl
     const { state } = req.query;
-    // define redirectUrl from the state or default to '/api/person'
-    const redirectUrl = state ?? "/api/person";
+    // define redirectUrl from the state or default to '/api/order'
+    const redirectUrl = state ?? "/api/order";
 
     // create the token
     const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET);

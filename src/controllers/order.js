@@ -1,10 +1,10 @@
-const PersonService = require("../services/person");
+const OrderService = require("../services/order");
 
 const getAll = async (req, res, next) => {
   try {
     const { _id: ownerId } = req.user;
-    const person = await PersonService.getAll(ownerId);
-    res.json({ data: person });
+    const order = await OrderService.getAll(ownerId);
+    res.json({ data: order });
   } catch (error) {
     next(error);
   }
@@ -12,8 +12,8 @@ const getAll = async (req, res, next) => {
 
 const getOne = async (req, res, next) => {
   try {
-    const person = await PersonService.getOne(req.params.id);
-    res.json({ data: person });
+    const order = await OrderService.getOne(req.params.id);
+    res.json({ data: order });
   } catch (error) {
     next(error);
   }
@@ -23,12 +23,12 @@ const create = async (req, res, next) => {
   try {
     const { name, dob } = req.sanitizedBody;
     const { _id: ownerId } = req.user;
-    const createdPerson = await PersonService.create({
+    const createdOrder = await OrderService.create({
       name,
       dob,
       ownerId,
     });
-    res.status(201).json({ data: createdPerson });
+    res.status(201).json({ data: createdOrder });
   } catch (error) {
     next(error);
   }
@@ -36,11 +36,11 @@ const create = async (req, res, next) => {
 
 const replace = async (req, res, next) => {
   try {
-    const replacedPerson = await PersonService.replace(
+    const replacedOrder = await OrderService.replace(
       req.params.id,
       req.sanitizedBody
     );
-    res.json({ data: replacedPerson });
+    res.json({ data: replacedOrder });
   } catch (error) {
     next(error);
   }
@@ -48,12 +48,12 @@ const replace = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const updatedPerson = await PersonService.update(
+    const updatedOrder = await OrderService.update(
       req.params.id,
       req.sanitizedBody
     );
 
-    res.json({ data: updatedPerson });
+    res.json({ data: updatedOrder });
   } catch (error) {
     next(error);
   }
@@ -61,8 +61,8 @@ const update = async (req, res, next) => {
 
 const deleteOne = async (req, res, next) => {
   try {
-    const deletedPerson = await PersonService.deleteOne(req.params.id);
-    res.json({ data: deletedPerson });
+    const deletedOrder = await OrderService.deleteOne(req.params.id);
+    res.json({ data: deletedOrder });
   } catch (error) {
     next(error);
   }
