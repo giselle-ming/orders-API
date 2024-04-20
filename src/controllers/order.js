@@ -21,11 +21,11 @@ const getOne = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { name, dob } = req.sanitizedBody;
+    const { products, total } = req.sanitizedBody;
     const { _id: ownerId } = req.user;
     const createdOrder = await OrderService.create({
-      name,
-      dob,
+      products,
+      total,
       ownerId,
     });
     res.status(201).json({ data: createdOrder });
