@@ -7,12 +7,12 @@ const productModel = new Schema(
       required: true,
     },
     ingredients: {
-      type: String, // Changed from String to [String]
-      required: false,
+      type: String,
+      required: true,
     },
     size: {
       type: String,
-      required: false,
+      required: true,
     },
     price: {
       type: Number,
