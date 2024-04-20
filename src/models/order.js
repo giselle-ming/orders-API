@@ -1,26 +1,25 @@
 const { Schema, model, Types } = require("mongoose");
 
+const productSchema = new Schema(
+  {
+    name: String,
+    size: String,
+    price: Number,
+  },
+  { _id: false }
+); // This is important to prevent Mongoose from creating an ObjectId for this subdocument
+
 const orderModel = new Schema(
   {
-    products: [
-      {
-        type: Types.ObjectId,
-        ref: "product", // Changed from "Product" to "product"
-        required: true,
-      },
-    ],
+    products: [productSchema], // Use the productSchema for products
     date: {
       type: Date,
       default: Date.now,
     },
-    price: {
-      type: Number,
-      required: true,
-    },
     ownerId: {
       type: Types.ObjectId,
       required: true,
-      ref: "user", // Changed from "User" to "user" to match your user model
+      ref: "user",
     },
   },
   {
