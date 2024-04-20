@@ -15,8 +15,12 @@ const getOne = async (id) => {
 };
 
 const create = async (orderData) => {
-  if (!orderData.products || !orderData.ownerId) {
-    throw new BadRequestError("Products and ownerId are required");
+  if (
+    !orderData.products ||
+    !orderData.ownerId ||
+    typeof orderData.total !== "number"
+  ) {
+    throw new BadRequestError("Products, total and ownerId are required");
   }
 
   // Validate each product in orderData.products
@@ -34,8 +38,12 @@ const create = async (orderData) => {
 };
 
 const replace = async (id, orderData) => {
-  if (!orderData.products || !orderData.ownerId) {
-    throw new BadRequestError("Products and ownerId are required");
+  if (
+    !orderData.products ||
+    !orderData.ownerId ||
+    typeof orderData.total !== "number"
+  ) {
+    throw new BadRequestError("Products, total and ownerId are required");
   }
 
   // Validate each product in orderData.products

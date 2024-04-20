@@ -16,6 +16,10 @@ const orderModel = new Schema(
       type: Date,
       default: Date.now,
     },
+    total: {
+      type: Number,
+      required: true,
+    },
     ownerId: {
       type: Types.ObjectId,
       required: true,
